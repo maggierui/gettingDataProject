@@ -1,6 +1,6 @@
 ##download dataset zip file
 file.URL<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-download.file<-(file.URL,destfile="./data/mobile.zip",method="auto")
+download.file(file.URL,destfile="./data/mobile.zip",method="auto")
 ##unzip file
 unzip("./data/mobile.zip",exdir="./data")
 
@@ -18,8 +18,8 @@ dat_names<-read.table("./data/UCI HAR Dataset/features.txt",stringsAsFactors=FAL
 ## give dat column names with features.txt, which is the second variable "V2" in dat_names
 colnames(dat)<-dat_names$V2
 
-## subset only columns with strings of "mean()" and "std()" in it. 
-dat<-dat[,grepl("mean()|std()",colnames(dat))]
+## subset only columns with strings of "mean()" and "std()" in it. Using "\\b" to mark the beginning and end of strings.
+dat<-dat[,grepl("\\bmean()\\b|\\bstd()\\b",colnames(dat))]
 
 ## read in activity labels for train and test data
 dat_train_label<-read.table("./data/UCI HAR Dataset/train/Y_train.txt")
@@ -30,10 +30,22 @@ dat_label<-rbind(dat_train_label,dat_test_label)
 colnames(dat_label)<-"Activity"
 dat_label[,1]<-as.character(dat_label[,1])
 
-##add activity label column to the dataset 
-dat_1<-cbind(dat_label,dat)
-
 ##use revalue in plyr package to relabel activities
 library(plyr)
-revalue(dat_1$Activity,c("1"="WALKING","2"="WALKING_UPSTAIRS","3"="WALKING_DOWNSTAIRS","4"="SITTING","5"="STANDING","6"="LAYING"))
+dat_label<-revalue(dat_label$Activity,c("1"="WALKING","2"="WALKING_UPSTAIRS","3"="WALKING_DOWNSTAIRS","4"="SITTING","5"="STANDING","6"="LAYING"))
+
+## read in subject IDs for train and test data
+dat_train_subject<-read.table("./data/UCI HAR Dataset/train/subject_train.txt")
+dat_test_subject<-read.table("./data/UCI HAR Dataset/test/subject_test.txt")
+
+##combine activity labels for train and test data
+dat_subject<-rbind(dat_train_subject,dat_test_subject)
+colnames(dat_subject)<-"ID"
+
+##combine subject ID, activity type, and actual data
+dat<-cbind(dat_subject,dat_label,dat)
+
+
+
+
 
