@@ -70,6 +70,6 @@ install.packages("dplyr")
 library(dplyr)
 columns<-c("id","activity")
 dat_new<-as.data.frame(dat %>%
-                           group_by_(.dots = columns) %>%
-                           summarise_each(funs(mean)))
+                         group_by_(.dots = columns) %>%
+                         summarise_each(funs(mean)))
 write.table(dat_new,"feature_means.txt",row.name=FALSE)
