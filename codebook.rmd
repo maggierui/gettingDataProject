@@ -77,7 +77,7 @@ The second column is "activity", which is one of the six type of activities ment
 The rest 66 variables are the means of each feature observed in the previous data set, by each subject for each type of activity.
 ##Note: there are many threads on the discussion forum about "to what level is descriptive". 
 ##      I choose to follow the "all lower case" and "no special character" rules.
-##      Meanwhile, I decide not to replace every arrievated words to their full versions, for the sake of readability.
+##      Meanwhile, I decide not to replace every abrrevated words to their full versions, for the sake of readability.
 
 Detailed description for each variable as shown below:
 $ id                          : int  1 1 1 1 1 1 2 2 2 2 ...
