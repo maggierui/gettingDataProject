@@ -17,7 +17,7 @@ In order to get the final new independent data set, which calculates the average
 13. Combine subject IDs for train and test data
 14. Rename subject IDs to "ID" with colnames( )
 15. Combine subject ID, activity type, and actual dataset using cbind( )
-16. Rename the variables with gsub( ) by getting rid of punctuations, changing upper case letters to lower cases, changing the first letter "t" to "time", and changing the first letter "f" to "frequency"
+16. Rename the variables with gsub( ) by getting rid of punctuations, changing upper case letters to lower cases (using tolower()), changing the first letter "t" to "time", and changing the first letter "f" to "frequency"
 17. Correct the typo of "bodybody" in some of the variable names with gsub( )
 18. Use summarise_each( ) to summarise the data by group of "id" and "activity"
 19. Use write.table( ) to write the output to a .txt file named "feature_means.txt"
